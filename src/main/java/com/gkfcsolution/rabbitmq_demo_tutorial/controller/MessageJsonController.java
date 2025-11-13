@@ -1,5 +1,7 @@
 package com.gkfcsolution.rabbitmq_demo_tutorial.controller;
 
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,7 @@ public class MessageJsonController {
 
     @PostMapping("/publish-json")
     public ResponseEntity<String> publishJsonMessage(@RequestBody User user) {
+        user.setId(UUID.randomUUID().toString());
         producer.sendJsonMessage(user);
         return ResponseEntity.ok("JSON message published successfully");
     }
